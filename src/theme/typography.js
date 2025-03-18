@@ -1,15 +1,13 @@
 export const typography = {
-  Regular: 'Inter_18pt-Regular',
+  Regular: 'Poppins-Regular',
 
-  Medium: 'Inter_18pt-Medium',
+  Medium: 'Poppins-Medium',
 
-  Bold: 'Inter_18pt-Bold',
+  Bold: 'Poppins-Bold',
 
-  SemiBold: 'Inter_18pt-SemiBold',
+  SemiBold: 'Poppins-SemiBold',
 
-  ExtraBold: 'Inter_18pt-ExtraBold',
+  ExtraBold: 'Poppins-ExtraBold',
 
-  ExtraBoldItalic: 'Inter_18pt-ExtraBoldItalic',
-
-  Poppins_SemiBold: 'Poppins-SemiBold',
+  ExtraBoldItalic: 'Poppins-ExtraBoldItalic',
 };
