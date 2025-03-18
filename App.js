@@ -1,154 +1,64 @@
-/* eslint-disable react-native/no-inline-styles */
 /* eslint-disable react/no-unstable-nested-components */
-import React, {useEffect, useRef} from 'react';
+import React from 'react';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import {NavigationContainer} from '@react-navigation/native';
 import {
-  Dimensions,
   Image,
-  ImageBackground,
-  ScrollView,
   StatusBar,
   StyleSheet,
-  Text,
   View,
+  Text,
+  Dimensions,
 } from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
-import {typography} from './src/theme/typography';
 import {SafeAreaView} from 'react-native-safe-area-context';
-import SystemNavigationBar from 'react-native-system-navigation-bar';
 import Home from './src/screens/Home';
 import MoreSpin from './src/screens/MoreSpin';
 import Invitation from './src/screens/Invitation';
 import CashOut from './src/screens/CashOut';
+import {typography} from './src/theme/typography';
 
 const Tab = createBottomTabNavigator();
 
 const {width} = Dimensions.get('window');
 
-const cardWidth = width * 0.89; // Each card takes 85% of screen width
-
-const data = [
-  {
-    id: '1',
-    image:
-      'https://www.pixelstalk.net/wp-content/uploads/2016/07/Wallpapers-pexels-photo.jpg',
-  },
-  {
-    id: '2',
-    image:
-      'https://th.bing.com/th/id/R.124a1db7be2c13d936d8a71bd43ffd5f?rik=2ZT%2baXLkZYcxWg&riu=http%3a%2f%2fthewowstyle.com%2fwp-content%2fuploads%2f2015%2f01%2fnature-wallpaper-27.jpg&ehk=jIVFSOxLN%2fQKs4hEfZHNWAeXoeXkeEXooP%2fTy9Vwkek%3d&risl=&pid=ImgRaw&r=0',
-  },
-  {
-    id: '3',
-    image:
-      'https://www.pixelstalk.net/wp-content/uploads/2016/08/Best-Nature-Full-HD-Images-For-Desktop.jpg',
-  },
-];
-
-
-// const CustomHeader = ({title}) => {
-//   const scrollViewRef = useRef(null);
-//   const defaultIndex = 1;
-
-//   useEffect(() => {
-//     if (scrollViewRef.current) {
-//       scrollViewRef.current.scrollTo({
-//         x: cardWidth * defaultIndex - 8,
-//         animated: true,
-//       });
-//     }
-//   }, []);
-
-//   return (
-//     <View style={styles.container}>
-//       <View style={styles.header_container}>
-//         <LinearGradient
-//           colors={['#048267', '#025947']} // Define gradient colors
-//           style={styles.gradient}
-//           start={{x: 0, y: 0}} // Gradient start point (top-left)
-//           end={{x: 1, y: 1}} // Gradient end point (bottom-right)
-//         >
-//           <Text style={styles.text}>App Name logo</Text>
-//           <View style={styles.user_view}>
-//             <View style={[styles.icon_view, {marginRight: 12}]}>
-//               <Image
-//                 source={require('./src/assets/images/user.png')}
-//                 style={styles.userIcon}
-//               />
-//             </View>
-//             <View style={styles.icon_view}>
-//               <Image
-//                 source={require('./src/assets/images/bell.png')}
-//                 style={styles.userIcon}
-//               />
-//             </View>
-//           </View>
-//         </LinearGradient>
-//       </View>
-
-//       <ScrollView
-//         ref={scrollViewRef}
-//         scrollEnabled={true}
-//         horizontal
-//         showsHorizontalScrollIndicator={false}
-//         // pagingEnabled
-//         contentContainerStyle={{
-//           // paddingHorizontal: 10,
-//           marginTop: 14,
-//           marginBottom: 13,
-//         }}
-//         snapToStart={1}>
-//         {data.map((item, index) => (
-//           <View style={styles.carouseCardView} key={index}>
-//             <ImageBackground
-//               source={require('./src/assets/images/bg.jpg')}
-//               style={styles.background}
-//               borderRadius={15}
-//               resizeMode="cover">
-//               <View style={styles.carouseView}>
-//                 <View style={styles.carouseHeaderView}>
-//                   <Text style={styles.carouseTitle}>
-//                     International League T20
-//                   </Text>
-
-//                   <Image
-//                     source={require('./src/assets/images/live.png')}
-//                     style={styles.liveImg}
-//                   />
-//                 </View>
-//                 <View style={styles.dataView}>
-//                   <View style={styles.textImgView}>
-//                     <Image
-//                       source={require('./src/assets/images/ind.png')}
-//                       style={styles.iconStyle}
-//                     />
-//                     <Text style={styles.indTxt}>IND</Text>
-//                   </View>
-//                   <View style={styles.textImgView}>
-//                     <Text style={styles.srcTxt}>30/0 (4)</Text>
-//                     <Text style={styles.bowlDetailsText}>ADKR to Bowl</Text>
-//                   </View>
-//                   <View style={styles.textImgView}>
-//                     <Image
-//                       source={require('./src/assets/images/engd.png')}
-//                       style={styles.iconStyle}
-//                     />
-//                     <Text style={styles.indTxt}>END</Text>
-//                   </View>
-//                 </View>
-//               </View>
-//             </ImageBackground>
-//           </View>
-//         ))}
-//       </ScrollView>
-//     </View>
-//   );
-// };
+const CustomHeader = () => {
+  return (
+    <View
+      style={[
+        styles.gradient, // Keep your existing styles
+        {
+          backgroundColor: '#2B0552',
+          justifyContent: 'center',
+          alignItems: 'center',
+        },
+      ]}>
+      {/* <LinearGradient
+        colors={['#2B0552', '#7600EB', '#7600EB', '#7600EB', '#2B0552']} // Dark on sides, light in middle
+        locations={[0, 0.3, 0.5, 0.7, 1]} // Darker on edges, lightest at center
+        style={[
+          styles.gradient,
+          {justifyContent: 'center', alignItems: 'center'},
+        ]}
+        start={{x: 0, y: 10}} // Start from left
+        end={{x: 1, y: 0}} // End at right
+      > */}
+        {/* <View style={styles.containerTop}> */}
+        {/* <View style={styles.header_container}> */}
+        {/* <View style={styles.container}> */}
+        <Image
+          source={require('./src/assets/images/HomeBannerSlides1.png')}
+          style={styles.bannerImg}
+        />
+        {/* </View> */}
+        {/* </View> */}
+        {/* </View> */}
+      {/* </LinearGradient> */}
+    </View>
+  );
+};
 
 export default function App() {
-  SystemNavigationBar.navigationHide();
-
   return (
     <>
       <StatusBar
@@ -156,245 +66,175 @@ export default function App() {
         translucent
         barStyle="light-content"
       />
-      <View
-        style={{
-          position: 'absolute',
-          top: 0,
-          left: 0,
-          right: 0,
-          height: 50,
-          // backgroundColor: 'red',
-          // overflow: 'hidden',
-          // elevation: 1,
-        }}>
-        <LinearGradient
-          colors={['#048267', '#025947']} // Define gradient colors
-          style={styles.gradient}
-          start={{x: 0, y: 0}} // Gradient start point (top-left)
-          end={{x: 1, y: 1}}
-        />
-      </View>
-      <SafeAreaView
-        style={{
-          flex: 1,
-          // backgroundColor: 'red', paddingBottom: 10
-        }}>
-        <NavigationContainer>
-          <Tab.Navigator
-          // screenOptions={({route}) => ({
-          //   header: () => <CustomHeader title={route.name} />,
-          //   tabBarIcon: ({focused, color, size}) => {
-          //     let iconSource;
-          //     update = route.name;
-          //     if (route.name === 'Home') {
-          //       iconSource = require('./src/assets/images/home.png');
-          //     } else if (route.name === 'Series') {
-          //       iconSource = require('./src/assets/images/cup.png');
-          //     } else if (route.name === 'Reels') {
-          //       iconSource = require('./src/assets/images/play.png');
-          //     } else if (route.name === 'Images') {
-          //       iconSource = require('./src/assets/images/img.png');
-          //     }
+      <LinearGradient
+        colors={['#2B0552', '#7600EB', '#2B0552']}
+        locations={[0, 0.5, 1]}
+        style={styles.fullScreenGradient}
+        start={{x: 0, y: 0}}
+        end={{x: 0, y: 1}}>
+        <SafeAreaView style={styles.container}>
+          <NavigationContainer>
+            <Tab.Navigator
+              screenOptions={({route}) => ({
+                header: () => <CustomHeader />,
+                tabBarShowLabel: false,
+                // headerShown: false,
 
-          //     return (
-          //       <Image
-          //         source={iconSource}
-          //         style={{
-          //           height: 25,
-          //           width: 25,
-          //           tintColor: focused ? '#048267' : '#000000',
-          //           // marginTop: 10,
-          //         }}
-          //       />
-          //     );
-          //   },
-          //   tabBarActiveTintColor: '#048267',
-          //   tabBarInactiveTintColor: '#000000',
-          //   tabBarStyle: {
-          //     backgroundColor: '#fff',
-          //     // backgroundColor: '#048267',
-          //     borderTopLeftRadius: 20,
-          //     borderTopRightRadius: 20,
-          //     position: 'absolute',
-          //     overflow: 'hidden',
-          //     height: 70,
-          //     alignSelf: 'center',
-          //     alignContent: 'center',
-          //     alignItems: 'center',
-          //     justifyContent: 'center',
-          //     paddingTop: 10,
-          //     elevation: 5,
-          //     shadowColor: '#000',
-          //     shadowOffset: {width: 0, height: 5},
-          //     shadowOpacity: 0.3,
-          //     shadowRadius: 6,
-          //     paddingBottom: 5,
-          //   },
+                tabBarIcon: ({focused}) => {
+                  let iconSource;
+                  let labelColor = focused ? '#330562' : '#FFFFFF';
+                  let bgColor = focused ? '#FFBA01' : '#AA00FF';
+                  console.log('route', route.name);
 
-          //   tabBarLabelStyle: {
-          //     fontSize: 12,
-          //     fontFamily: typography.Poppins_SemiBold,
-          //     // paddingTop: 10,
-          //   },
-          //   keyboardHidesTabBar: false,
-          // })}
-          >
-            <Tab.Screen name="Home" component={Home} />
-            <Tab.Screen name="More Spin" component={MoreSpin} />
-            <Tab.Screen name="Invitation" component={Invitation} />
-            <Tab.Screen name="CashOut" component={CashOut} />
-          </Tab.Navigator>
-        </NavigationContainer>
-      </SafeAreaView>
+                  if (route.name === 'Home') {
+                    iconSource = require('./src/assets/images/home.png');
+                  } else if (route.name === 'More Spin') {
+                    iconSource = require('./src/assets/images/box.png');
+                  } else if (route.name === 'Invitation') {
+                    iconSource = require('./src/assets/images/spin.png');
+                  } else if (route.name === 'Cash Out') {
+                    iconSource = require('./src/assets/images/ruppy.png');
+                  }
+
+                  return (
+                    <View style={[styles.tabContainer]}>
+                      <Image source={iconSource} style={styles.icon} />
+                      <LinearGradient
+                        colors={
+                          focused
+                            ? ['#FFBA01', '#E08304']
+                            : ['#AA00FF', '#630095']
+                        } // Define gradient colors
+                        style={styles.gradient}
+                        start={{x: 0, y: 0}} // Gradient start point (top-left)
+                        end={{x: 0, y: 1}} // Gradient end point (bottom-right)
+                      >
+                        <Text
+                          style={[
+                            styles.tabLabel,
+                            {
+                              color: labelColor,
+                              // backgroundColor: bgColor,
+                            },
+                          ]}>
+                          {route.name}
+                        </Text>
+                      </LinearGradient>
+                    </View>
+                  );
+                },
+                tabBarStyle: styles.tabBar,
+                // tabBarLabelStyle: {
+                //   fontSize: 12,
+                //   fontFamily: typography.Bold,
+                //   // paddingTop: 0,
+                //   borderWidth: 2,
+                //   borderColor: '#9006C1',
+                //   borderRadius: 7,
+                //   paddingHorizontal: 15,
+                //   backgroundColor: '#E08304',
+                //   color: '#330562',
+                // },
+                contentStyle: {backgroundColor: 'red'},
+              })}>
+              <Tab.Screen name="Home" component={Home} />
+              <Tab.Screen name="More Spin" component={MoreSpin} />
+              <Tab.Screen name="Invitation" component={Invitation} />
+              <Tab.Screen name="Cash Out" component={CashOut} />
+            </Tab.Navigator>
+          </NavigationContainer>
+        </SafeAreaView>
+      </LinearGradient>
     </>
   );
 }
 
 const styles = StyleSheet.create({
+  containerTop: {
+    // flex: 1,
+    // justifyContent: 'center',
+    // alignItems: 'center',
+    // backgroundColor: 'rgba(4, 130, 103, 0.1)',
+  },
   header_container: {
     // flex: 1,
     flexDirection: 'row',
-    backgroundColor: '#048267',
+    // backgroundColor: '#048267',
     // padding: 20,
     justifyContent: 'space-between',
     alignItems: 'center',
   },
-  gradient: {
+
+  fullScreenGradient: {
     flex: 1,
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-    paddingHorizontal: 22,
-    paddingTop: 35,
-    paddingVertical: 17,
-    borderEndColor: '#000000',
-    borderBottomWidth: 1,
-    borderLeftWidth: 1,
   },
-  text: {
-    color: '#FFFFFF',
-    fontSize: 20,
-    fontFamily: typography.ExtraBoldItalic,
-  },
-  user_view: {
+  container: {
+    flex: 1,
+    // backgroundColor: 'transparent',
+    justifyContent: 'center',
     flexDirection: 'row',
   },
-  icon_view: {
-    paddingHorizontal: 8,
-    paddingVertical: 7,
-    backgroundColor: '#048267',
-    borderRadius: 30,
+  bannerImg: {
+    width: 374,
+    height: 166,
+    borderRadius: 12,
+    marginTop: 40,
   },
-  userIcon: {
-    width: 15.17,
-    height: 17.93,
+  tabBar: {
+    position: 'absolute',
+    height: 80,
+    alignSelf: 'center',
+    backgroundColor: 'transparent',
+    borderRadius: 20,
+    elevation: 0, // Remove shadow on Android
+    shadowOpacity: 0, // Remove shadow on iOS
+    borderWidth: 0, // Ensure no border
+    borderTopWidth: 0, // 🔥 Remove the white line
+    paddingTop: 10,
+  },
+  tabContainer: {
+    // flexDirection: 'row', // Align icon and text in a row
+    alignItems: 'center', // Center content vertically
+    justifyContent: 'center', // Center content horizontally
+    borderColor: '#BB08FA54',
+    borderWidth: 1,
+    borderRadius: 10,
+    // paddingVertical: 10,
+    // paddingHorizontal: 20,
+    backgroundColor: '#8B4FC94F',
+    // width: 'auto', // Allow dynamic width
+    width: width * 0.22,
+    height: 70,
   },
 
-  container: {
-    // flex: 1,
-    // justifyContent: 'center',
-    // alignItems: 'center',
-    backgroundColor: 'rgba(4, 130, 103, 0.1)',
-  },
-  slide: {borderRadius: 10, overflow: 'hidden', elevation: 5},
-  image: {width: '100%', height: 200, borderRadius: 10},
-  carouseView: {
-    flex: 1,
-    // borderWidth: 1,
-    // justifyContent: 'center',
-    backgroundColor: 'rgba(0, 0, 0, 0.7)',
-    paddingTop: 9,
-    // paddingBottom: 12,
-    paddingHorizontal: 16,
-    borderRadius: 15,
-  },
-  carouseHeaderView: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-  },
-  carouseTitle: {
-    color: '#FFFFFF',
-    fontSize: 14,
-    fontFamily: typography.SemiBold,
-  },
-  liveTxt: {
-    color: '#FFFFFF',
+  tabLabel: {
     fontSize: 11,
     fontFamily: typography.SemiBold,
-    // backgroundColor: '#FF0000',
-    // borderWidth: 2,
-    // borderColor: '#820404',
-    // borderRadius: 6,
-    // paddingHorizontal: 5,
-    // paddingVertical: 0,
-    // alignItems: 'center',
-    // alignContent: 'center',
-    // alignSelf: 'center',
-    // textAlign: 'center',
-    // justifyContent: 'center',
+    borderWidth: 2,
+    borderRadius: 7,
+    // paddingHorizontal: 15,
+    // paddingVertical: 5,
+    // marginTop: 5,
+    textAlign: 'center',
+    borderColor: '#9006C1',
+    width: 70,
   },
-  liveImg: {
-    width: 57,
-    height: 18,
-    resizeMode: 'center',
+  icon: {
+    height: 25,
+    width: 25,
+    marginBottom: 5,
   },
-  dataView: {
-    flexDirection: 'row',
-    justifyContent: 'space-evenly',
-    marginTop: 18,
-    // alignContent: 'center',
-    alignItems: 'center',
-    // alignSelf: 'center',
-    // marginBottom: 12,
-  },
-  textImgView: {
-    // justifyContent: 'center',
-    // alignContent: 'center',
-    alignItems: 'center',
-    // alignSelf: 'center',
-    // backgroundColor: 'red',
-  },
-  iconStyle: {
-    width: 30,
-    height: 30,
-  },
-  background: {
+  gradient: {
+    borderRadius: 7,
     // flex: 1,
-    // justifyContent: 'center',
+    // flexDirection: 'row',
+    // justifyContent: 'space-between',
     // alignItems: 'center',
-    // width: width * 0.3,
-    // backgroundColor: 'red',
-    // width: width * 0.9,
-    // width: '100%', // Ensure full width of parent View
-    height: 110,
-    borderRadius: 10,
-    // overflow: 'hidden',
-  },
-  indTxt: {
-    color: '#FFFFFF',
-    fontSize: 16,
-    fontFamily: typography.SemiBold,
-  },
-  srcTxt: {
-    color: '#FFFFFF',
-    fontSize: 15,
-    fontFamily: typography.Bold,
-  },
-  bowlDetailsText: {
-    color: '#FFFFFF',
-    fontSize: 13,
-    fontFamily: typography.Medium,
-  },
-  // overlay: {
-  //   backgroundColor: 'rgba(0, 0, 0, 0.5)', // Optional: Adds a dark overlay
-  //   padding: 20,
-  //   borderRadius: 10,
-  // },
-  carouseCardView: {
-    // flex: 1,
-    // backgroundColor: 'red',/
-    // marginHorizontal: 10,
-    width: cardWidth,
-    marginHorizontal: 5,
+    // paddingHorizontal: 22,
+    // paddingTop: 35,
+    // paddingVertical: 17,
+    // borderEndColor: '#000000',
+    // borderBottomWidth: 1,
+    // borderLeftWidth: 1,
   },
 });
