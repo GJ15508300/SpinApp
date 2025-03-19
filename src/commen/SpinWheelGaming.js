@@ -70,7 +70,6 @@ const SpinWheelGaming = () => {
                     originX: 150,
                     originY: 150,
                   }}>
-                  {console.log('prize', prize)}
                   {prize}
                 </SvgText>
               </G>

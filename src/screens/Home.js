@@ -6,26 +6,19 @@ import {
   Animated,
   Image,
   Dimensions,
-  Modal,
   Text,
-  TouchableOpacity,
-  Button,
 } from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
-// import SpinWheel from '../commen/SpinWheel';
-// import ModalScreen from '../commen/ModalScreen';
 import {typography} from '../theme/typography';
-// import SpinWheelPack from '../commen/SpinWheelPack';
+import SpinWheelPack from '../commen/SpinWheelPack';
+import ModalScreen from '../commen/ModalScreen';
 
 const {width, height} = Dimensions.get('window'); // Get full screen size
 
 export default function Home() {
-  const [spinValue, setSpinValue] = useState(false);
-  const [data, setData] = useState('');
+  const [winnerValue, setWinnerValue] = useState(null);
   const rotateAnim = useRef(new Animated.Value(0)).current;
   const scaleAnim = useRef(new Animated.Value(1)).current;
-
-  // console.log('spinValue', spinValue);
 
   useEffect(() => {
     // Rotation Animation (Looping)
@@ -64,10 +57,6 @@ export default function Home() {
     outputRange: ['0deg', '360deg'],
   });
 
-  const closeModal = () => {
-    setSpinValue(null); // Clear spin value to hide the modal
-  };
-
   return (
     <>
       <LinearGradient
@@ -94,7 +83,7 @@ export default function Home() {
           {/* Rotating and Scaling Image */}
           <View>
             <Animated.Image
-              source={require('../assets/images/turn1.png')}
+              source={require('../assets/images/turnBB.png')}
               style={[
                 styles.bubble,
                 {
@@ -108,39 +97,23 @@ export default function Home() {
             <View
               style={{
                 position: 'absolute',
-                // justifyContent: 'center',
-                // alignContent: 'center',
-                // alignItems: 'center',
-                alignSelf: 'center',
+                top: 0,
+                bottom: 0,
+                left: 0,
+                right: 0,
               }}>
-             
-              {/* <SpinWheelPack /> */}
-              {/* <SpinWheel
-                setSpinValue={setSpinValue}
-                spinValue={spinValue}
-                setData={setData}
-              /> */}
+              <SpinWheelPack setWinnerValue={setWinnerValue} />
             </View>
           </View>
         </View>
       </LinearGradient>
-      {/* {spinValue && ( */}
-      {/* <ModalScreen
-        visible={spinValue}
-        data="This is a modal message!"
-        onClose={() => setSpinValue(false)}
-        dataValues={data}
-      /> */}
-      {/* )} */}
 
-      {/* <Modal visible={spinValue} transparent animationType="fade">
-        <View style={styles.overlay}>
-          <Text style={styles.result}>You won!</Text>
-          <TouchableOpacity onPress={() => setSpinValue(false)}>
-            <Text>Close</Text>
-          </TouchableOpacity>
-        </View>
-      </Modal> */}
+      <ModalScreen
+        visible={winnerValue ? true : false}
+        data="This is a modal message!"
+        onClose={() => setWinnerValue(null)}
+        dataValues={winnerValue}
+      />
     </>
   );
 }
@@ -161,21 +134,11 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     alignContent: 'center',
     alignSelf: 'center',
-
-    // justifyContent: 'center',
-    // alignItems: 'center',
-    //
-    //
-    // backgroundColor: 'rgba(0, 0, 0, 0.5)',
-    // backgroundColor: 'red',
-    // alignContent: 'center',
-    // alignSelf: 'center',
   },
 
   bubble: {
-    width: width,
-    height: height * 0.5,
-    resizeMode: 'contain',
+    width: width * 1.1,
+    height: height * 0.45,
   },
   indicatorImg: {
     width: width * 0.79,
@@ -185,13 +148,11 @@ const styles = StyleSheet.create({
     marginTop: 10,
     fontSize: 15,
     fontFamily: typography.Bold,
-    // textAlign: 'center',
     color: '#FFFFFF',
   },
   coinView: {
     marginTop: 30,
     flexDirection: 'row',
-    // alignContent: 'center',
     alignItems: 'center',
     alignContent: 'center',
     alignSelf: 'center',
@@ -205,7 +166,6 @@ const styles = StyleSheet.create({
   rsText: {
     fontSize: 25,
     fontFamily: typography.Bold,
-    // textAlign: 'center',
     color: '#FD9C05',
   },
 });

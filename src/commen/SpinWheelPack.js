@@ -10,7 +10,8 @@ import {
 import WheelOfFortune from 'react-native-wheel-of-fortune';
 import {typography} from '../theme/typography';
 import spinButton from '../assets/images/spinButton.png';
-import customKnob from '../assets/images/arrow.png';
+import backgroundImage from '../assets/images/bgMultiColor.png';
+import outerBackgroundImage from '../assets/images/outerBG.png';
 
 const participants = [
   'Mini',
@@ -23,9 +24,7 @@ const participants = [
   '₹100',
 ];
 
-const SpinWheelPack = () => {
-  const [winnerValue, setWinnerValue] = useState(null);
-  const [winnerIndex, setWinnerIndex] = useState(null);
+const SpinWheelPack = ({setWinnerValue}) => {
   const [started, setStarted] = useState(false);
   const wheelRef = useRef(null);
   const colorAnim = useRef(new Animated.Value(0)).current;
@@ -40,24 +39,6 @@ const SpinWheelPack = () => {
     ).start();
   }, [colorAnim]);
 
-  const rainbowColors = [
-    'red',
-    'orange',
-    'yellow',
-    'green',
-    'blue',
-    'indigo',
-    'violet',
-    'red',
-  ];
-
-  const interpolatedColor = colorAnim.interpolate({
-    inputRange: rainbowColors.map(
-      (_, index) => index / (rainbowColors.length - 1),
-    ),
-    outputRange: rainbowColors,
-  });
-
   const buttonPress = () => {
     setStarted(true);
     if (started) {
@@ -70,14 +51,18 @@ const SpinWheelPack = () => {
   const wheelOptions = {
     rewards: participants,
     knobSize: 30,
-    borderWidth: 5,
-    borderColor: interpolatedColor,
+    borderWidth: 0,
     innerRadius: 30,
     duration: 6000,
     backgroundColor: 'transparent', // Important: Make wheel background transparent
     textAngle: 'horizontal',
     knobSource: require('../assets/images/arrow.png'),
     onRef: ref => (wheelRef.current = ref),
+    colors: 'transparent',
+    innerImage: backgroundImage,
+    outerBackgroundImage: outerBackgroundImage,
+    fontFamily: typography.SemiBold,
+    fontSize: 18,
   };
 
   return (
@@ -86,20 +71,19 @@ const SpinWheelPack = () => {
         options={wheelOptions}
         getWinner={(value, index) => {
           setWinnerValue(value);
-          setWinnerIndex(index);
         }}
       />
 
-      {/* <Image source={customKnob} style={styles.customKnobStyle} /> */}
-
-      {/* {!started && ( */}
       <View style={styles.startButtonView}>
         <TouchableOpacity onPress={buttonPress} style={styles.startButton}>
           <Image source={spinButton} style={styles.spinBtnIcon} />
           <Text style={styles.startButtonText}>Spins</Text>
         </TouchableOpacity>
+        <Image
+          source={require('../assets/images/hand.png')}
+          style={styles.handImg}
+        />
       </View>
-      {/* )} */}
     </View>
   );
 };
@@ -109,6 +93,7 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
+    padding: 100,
   },
   wheelBackground: {
     ...StyleSheet.absoluteFillObject, // Cover the entire area
@@ -161,28 +146,15 @@ const styles = StyleSheet.create({
     position: 'absolute', // Position over the wheel
     width: 50, // Adjust size as needed
     height: 50, // Adjust size as needed
-    // Add calculations to position it correctly
-    // top: 0,
-    // left: 0,
+  },
+  handImg: {
+    width: 96,
+    height: 96,
+    position: 'absolute',
+    bottom: -20,
+    right: -40,
+    borderRadius: 100,
   },
 });
 
 export default SpinWheelPack;
-
-{
-  /* {winnerIndex !== null && (
-        <View style={styles.winnerView}>
-          <Text style={styles.winnerText}>
-            You win {participants[winnerIndex]}
-          </Text>
-          <TouchableOpacity
-            onPress={() => {
-              setWinnerIndex(null);
-              wheelRef.current?._tryAgain();
-            }}
-            style={styles.tryAgainButton}>
-            <Text style={styles.tryAgainText}>TRY AGAIN</Text>
-          </TouchableOpacity>
-        </View>
-      )} */
-}

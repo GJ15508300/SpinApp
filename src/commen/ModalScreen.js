@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react';
+import React from 'react';
 import {
   Modal,
   View,
@@ -10,8 +10,19 @@ import {
 import LinearGradient from 'react-native-linear-gradient';
 import {typography} from '../theme/typography';
 
+const participants = [
+  {name: 'Mini', image: require('../assets/images/mini.png')},
+  {name: 'Mega', image: require('../assets/images/megacoin.png')},
+  {name: 'Double', image: require('../assets/images/doubleCoin.png')},
+  {name: '?', image: require('../assets/images/cashOut.png')},
+  {name: 'Medium', image: require('../assets/images/medium.png')},
+  {name: '₹100', image: require('../assets/images/100rupee.png')},
+];
+
 const ModalScreen = ({visible, data, onClose, dataValues}) => {
-  console.log('dataValues', dataValues);
+  const found = participants.find(
+    participant => participant.name === dataValues,
+  );
 
   return (
     <Modal transparent visible={visible} animationType="fade">
@@ -30,7 +41,7 @@ const ModalScreen = ({visible, data, onClose, dataValues}) => {
 
           <View style={styles.modalContent}>
             <Image
-              source={dataValues?.image}
+              source={found?.image}
               //   source={require(data?.imageOpt2)}
               //   source={require('../assets/images/2coin.png')}
               style={{width: 180, height: 100}}
@@ -79,12 +90,8 @@ const styles = StyleSheet.create({
     right: 0,
     bottom: 0,
     zIndex: 999, // Ensure it is above everything
-    // padding: 30,
-    // alignContent: 'center',
-    // alignSelf: 'center',
   },
   container: {
-    // flex: 1,
     paddingBottom: 40,
     margin: 40,
     borderRadius: 30,
@@ -110,7 +117,6 @@ const styles = StyleSheet.create({
   },
 
   modalContent: {
-    // backgroundColor: 'white',
     padding: 10,
     borderRadius: 90,
     alignItems: 'center',
@@ -128,8 +134,6 @@ const styles = StyleSheet.create({
     textAlign: 'center',
   },
   button: {
-    // marginTop: 10,
-    // backgroundColor: 'blue',
     paddingVertical: 5,
     paddingHorizontal: 20,
     borderRadius: 5,
@@ -145,7 +149,6 @@ const styles = StyleSheet.create({
   gradient: {
     marginTop: 35,
     borderRadius: 7,
-    // flex: 1,
   },
   xIcon: {
     width: 27,

@@ -1,12 +1,9 @@
-import React, {useState} from 'react';
-import {View, Text, StyleSheet, Button} from 'react-native';
+import React from 'react';
+import {View, Text, StyleSheet} from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
 import {typography} from '../theme/typography';
-import ModalScreen from '../commen/ModalScreen';
 
 export default function MoreSpin() {
-  const [spinValue, setSpinValue] = useState(false); // Initially hidden
-
   return (
     <View style={styles.container}>
       {/* Gradient Background */}
@@ -19,16 +16,8 @@ export default function MoreSpin() {
       >
         <View style={styles.content}>
           <Text style={styles.text}>Under Development</Text>
-          {/* <Button onPress={() => setSpinValue(true)} title="Show Modal" /> */}
         </View>
       </LinearGradient>
-
-      {/* Modal should be outside the gradient */}
-      <ModalScreen
-        visible={spinValue}
-        data="This is a modal message!"
-        onClose={() => setSpinValue(false)}
-      />
     </View>
   );
 }

@@ -2,7 +2,6 @@ import React from 'react';
 import {View, Text, StyleSheet} from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
 import {typography} from '../theme/typography';
-import SpinWheelSpin from '../commen/SpinWheelSpin';
 
 export default function Invitation() {
   return (
@@ -14,8 +13,7 @@ export default function Invitation() {
       end={{x: 1, y: 0}} // End at right
     >
       <View style={styles.content}>
-        {/* <Text style={styles.text}>Under Development</Text> */}
-        <SpinWheelSpin />
+        <Text style={styles.text}>Under Development</Text>
       </View>
     </LinearGradient>
   );

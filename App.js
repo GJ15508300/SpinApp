@@ -59,9 +59,8 @@ export default function App() {
           <NavigationContainer>
             <Tab.Navigator
               screenOptions={({route}) => ({
-                // header: () => <CustomHeader />,
+                header: () => <CustomHeader />,
                 tabBarShowLabel: false,
-                // headerShown: false,
 
                 tabBarIcon: ({focused}) => {
                   let iconSource;
@@ -95,7 +94,6 @@ export default function App() {
                             styles.tabLabel,
                             {
                               color: labelColor,
-                              // backgroundColor: bgColor,
                             },
                           ]}>
                           {route.name}
@@ -120,17 +118,9 @@ export default function App() {
 }
 
 const styles = StyleSheet.create({
-  containerTop: {
-    // flex: 1,
-    // justifyContent: 'center',
-    // alignItems: 'center',
-    // backgroundColor: 'rgba(4, 130, 103, 0.1)',
-  },
+  containerTop: {},
   header_container: {
-    // flex: 1,
     flexDirection: 'row',
-    // backgroundColor: '#048267',
-    // padding: 20,
     justifyContent: 'space-between',
     alignItems: 'center',
   },
@@ -140,7 +130,6 @@ const styles = StyleSheet.create({
   },
   container: {
     flex: 1,
-    // backgroundColor: 'transparent',
     justifyContent: 'center',
     flexDirection: 'row',
   },
@@ -148,7 +137,6 @@ const styles = StyleSheet.create({
     width: 374,
     height: 166,
     borderRadius: 12,
-    marginTop: 40,
   },
   tabBar: {
     position: 'absolute',
@@ -163,16 +151,12 @@ const styles = StyleSheet.create({
     paddingTop: 10,
   },
   tabContainer: {
-    // flexDirection: 'row', // Align icon and text in a row
     alignItems: 'center', // Center content vertically
     justifyContent: 'center', // Center content horizontally
     borderColor: '#BB08FA54',
     borderWidth: 1,
     borderRadius: 10,
-    // paddingVertical: 10,
-    // paddingHorizontal: 20,
     backgroundColor: '#8B4FC94F',
-    // width: 'auto', // Allow dynamic width
     width: width * 0.22,
     height: 70,
   },
@@ -182,9 +166,6 @@ const styles = StyleSheet.create({
     fontFamily: typography.SemiBold,
     borderWidth: 2,
     borderRadius: 7,
-    // paddingHorizontal: 15,
-    // paddingVertical: 5,
-    // marginTop: 5,
     textAlign: 'center',
     borderColor: '#9006C1',
     width: 70,
@@ -196,19 +177,5 @@ const styles = StyleSheet.create({
   },
   gradient: {
     borderRadius: 7,
-    // flex: 1,
-    // flexDirection: 'row',
-    // justifyContent: 'space-between',
-    // alignItems: 'center',
-    // paddingHorizontal: 22,
-    // paddingTop: 35,
-    // paddingVertical: 17,
-    // borderEndColor: '#000000',
-    // borderBottomWidth: 1,
-    // borderLeftWidth: 1,
   },
 });
-
-// "overrides": {
-//   "react-native-svg": "15.11.2"
-// }
