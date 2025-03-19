@@ -17,6 +17,7 @@ const {width, height} = Dimensions.get('window'); // Get full screen size
 
 export default function Home() {
   const [winnerValue, setWinnerValue] = useState(null);
+  const [disablePress, setDisablePress] = useState(false);
   const rotateAnim = useRef(new Animated.Value(0)).current;
   const scaleAnim = useRef(new Animated.Value(1)).current;
 
@@ -102,7 +103,11 @@ export default function Home() {
                 left: 0,
                 right: 0,
               }}>
-              <SpinWheelPack setWinnerValue={setWinnerValue} />
+              <SpinWheelPack
+                setWinnerValue={setWinnerValue}
+                disablePress={disablePress}
+                setDisablePress={setDisablePress}
+              />
             </View>
           </View>
         </View>
@@ -111,7 +116,10 @@ export default function Home() {
       <ModalScreen
         visible={winnerValue ? true : false}
         data="This is a modal message!"
-        onClose={() => setWinnerValue(null)}
+        onClose={() => {
+          setWinnerValue(null);
+          setDisablePress(false);
+        }}
         dataValues={winnerValue}
       />
     </>

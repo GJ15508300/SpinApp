@@ -24,7 +24,7 @@ const participants = [
   '₹100',
 ];
 
-const SpinWheelPack = ({setWinnerValue}) => {
+const SpinWheelPack = ({setWinnerValue, setDisablePress, disablePress}) => {
   const [started, setStarted] = useState(false);
   const wheelRef = useRef(null);
   const colorAnim = useRef(new Animated.Value(0)).current;
@@ -40,6 +40,7 @@ const SpinWheelPack = ({setWinnerValue}) => {
   }, [colorAnim]);
 
   const buttonPress = () => {
+    setDisablePress(true);
     setStarted(true);
     if (started) {
       wheelRef.current?._tryAgain();
@@ -75,7 +76,10 @@ const SpinWheelPack = ({setWinnerValue}) => {
       />
 
       <View style={styles.startButtonView}>
-        <TouchableOpacity onPress={buttonPress} style={styles.startButton}>
+        <TouchableOpacity
+          onPress={buttonPress}
+          style={styles.startButton}
+          disabled={disablePress}>
           <Image source={spinButton} style={styles.spinBtnIcon} />
           <Text style={styles.startButtonText}>Spins</Text>
         </TouchableOpacity>
