@@ -1,18 +1,21 @@
 import React from 'react';
 import {View, Text, StyleSheet} from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
-import { typography } from '../theme/typography';
+import {typography} from '../theme/typography';
+import SpinWheelSpin from '../commen/SpinWheelSpin';
 
 export default function Invitation() {
   return (
     <LinearGradient
-      colors={['#2B0552', '#7600EB', '#2B0552']} // Gradient colors
-      locations={[0, 0.5, 1]} // Positions: Top, Middle, Bottom
+      colors={['#2B0552', '#7600EB', '#7600EB', '#7600EB', '#2B0552']} // Dark on sides, light in middle
+      locations={[0, 0.3, 0.5, 0.7, 1]} // Darker on edges, lightest at center
       style={styles.container} // Apply gradient to the entire screen
-      start={{x: 0, y: 0}}
-      end={{x: 0, y: 1}}>
+      start={{x: 0, y: 10}} // Start from left
+      end={{x: 1, y: 0}} // End at right
+    >
       <View style={styles.content}>
-              <Text style={styles.text}>Under Development</Text>
+        {/* <Text style={styles.text}>Under Development</Text> */}
+        <SpinWheelSpin />
       </View>
     </LinearGradient>
   );
@@ -30,6 +33,6 @@ const styles = StyleSheet.create({
   text: {
     color: 'white',
     fontSize: 28,
-     fontFamily: typography.ExtraBold,
+    fontFamily: typography.ExtraBold,
   },
 });

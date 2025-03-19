@@ -1,0 +1,17 @@
+diff --git a/node_modules/react-native-wheel-of-fortune/src/index.js b/node_modules/react-native-wheel-of-fortune/src/index.js
+index 0cdb2a1..a71724a 100644
+--- a/node_modules/react-native-wheel-of-fortune/src/index.js
++++ b/node_modules/react-native-wheel-of-fortune/src/index.js
+@@ -313,9 +313,10 @@ class WheelOfFortune extends Component {
+             source={
+               this.props.options.knobSource
+                 ? this.props.options.knobSource
+-                : require('../assets/images/knob.png')
++                : null
++                // require('../assets/images/knob.png')
+             }
+-            style={{ width: knobSize, height: (knobSize * 100) / 57 }}
++            style={{ width: knobSize, height: (knobSize * 100) / 57,resizeMode:'contain' }}
+           />
+         </Svg>
+       </Animated.View>

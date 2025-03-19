@@ -33,27 +33,10 @@ const CustomHeader = () => {
           alignItems: 'center',
         },
       ]}>
-      {/* <LinearGradient
-        colors={['#2B0552', '#7600EB', '#7600EB', '#7600EB', '#2B0552']} // Dark on sides, light in middle
-        locations={[0, 0.3, 0.5, 0.7, 1]} // Darker on edges, lightest at center
-        style={[
-          styles.gradient,
-          {justifyContent: 'center', alignItems: 'center'},
-        ]}
-        start={{x: 0, y: 10}} // Start from left
-        end={{x: 1, y: 0}} // End at right
-      > */}
-        {/* <View style={styles.containerTop}> */}
-        {/* <View style={styles.header_container}> */}
-        {/* <View style={styles.container}> */}
-        <Image
-          source={require('./src/assets/images/HomeBannerSlides1.png')}
-          style={styles.bannerImg}
-        />
-        {/* </View> */}
-        {/* </View> */}
-        {/* </View> */}
-      {/* </LinearGradient> */}
+      <Image
+        source={require('./src/assets/images/HomeBannerSlides1.png')}
+        style={styles.bannerImg}
+      />
     </View>
   );
 };
@@ -76,15 +59,13 @@ export default function App() {
           <NavigationContainer>
             <Tab.Navigator
               screenOptions={({route}) => ({
-                header: () => <CustomHeader />,
+                // header: () => <CustomHeader />,
                 tabBarShowLabel: false,
                 // headerShown: false,
 
                 tabBarIcon: ({focused}) => {
                   let iconSource;
                   let labelColor = focused ? '#330562' : '#FFFFFF';
-                  let bgColor = focused ? '#FFBA01' : '#AA00FF';
-                  console.log('route', route.name);
 
                   if (route.name === 'Home') {
                     iconSource = require('./src/assets/images/home.png');
@@ -124,17 +105,6 @@ export default function App() {
                   );
                 },
                 tabBarStyle: styles.tabBar,
-                // tabBarLabelStyle: {
-                //   fontSize: 12,
-                //   fontFamily: typography.Bold,
-                //   // paddingTop: 0,
-                //   borderWidth: 2,
-                //   borderColor: '#9006C1',
-                //   borderRadius: 7,
-                //   paddingHorizontal: 15,
-                //   backgroundColor: '#E08304',
-                //   color: '#330562',
-                // },
                 contentStyle: {backgroundColor: 'red'},
               })}>
               <Tab.Screen name="Home" component={Home} />
@@ -238,3 +208,7 @@ const styles = StyleSheet.create({
     // borderLeftWidth: 1,
   },
 });
+
+// "overrides": {
+//   "react-native-svg": "15.11.2"
+// }
